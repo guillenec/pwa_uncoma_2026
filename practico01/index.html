@@ -12,8 +12,13 @@
 
   <body>
     <div id="app" class="mt-5">
-      <section class="text-center">
-        <h1 class="text-3xl font-bold underline">Tp1</h1>
+      <section class="flex flex-col gap-5">
+        <h1 class="text-3xl font-bold text-center">Trabajo practico 1</h1>
+        <p class="text-md pl-2.5">
+          Hola, mi nombre es <span class="font-bold">{{ nombre }}</span>, tengo
+          <span class="font-bold">{{ edad }}</span> años y vivo en
+          <span class="font-bold">{{ ciudad }}</span>
+        </p>
       </section>
     </div>
 
@@ -23,7 +28,11 @@
       var app = new Vue({
         el: '#app',
 
-        data: {},
+        data: {
+          nombre: 'Ana Garcia',
+          edad: 30,
+          ciudad: 'Tupungato',
+        },
 
         methods: {},
 
