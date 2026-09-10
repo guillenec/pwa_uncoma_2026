@@ -39,6 +39,34 @@
           </button>
         </div>
       </section>
+      <section class="flex flex-col gap-5 bg-amber-100 p-4 rounded-lg shadow-lg w-80 mx-auto mt-5">
+        <h2 class="text-2xl font-bold text-center">Ejersicio 3 Lista de tareas</h2>
+
+        <section class="flex flex-col border-slate-700 bg-yellow-200 p-4 rounded-lg shadow-lg">
+          <ul class="list-disc pl-5">
+            <li v-for="tarea in tareas" :key="tarea.id">
+              {{ tarea.nombre }}
+              <input type="checkbox" v-model="tarea.completada" class="ml-2" />
+            </li>
+          </ul>
+          <div class="flex flex-col gap-2 mt-3">
+            <input
+              type="text"
+              v-model="nuevaTarea"
+              placeholder="Añadir Tarea"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            />
+            <button
+              @click="agregarTarea(nuevaTarea)"
+              class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+            >
+              Agregar tarea
+            </button>
+          </div>
+        </section>
+        <div>tareas pemdientes: {{ tareasPendientes.length }}</div>
+        <div>tareas completadas: {{ totalTareas - tareasPendientes.length }}</div>
+      </section>
     </div>
 
     <script>
@@ -52,6 +80,12 @@
           edad: 30,
           ciudad: 'Tupungato',
           contador: 0,
+          nuevaTarea: '',
+          tareas: [
+            { id: 1, nombre: 'Aprende Vue', completada: true },
+            { id: 2, nombre: 'Aprende React', completada: true },
+            { id: 3, nombre: 'Aprende Angular', completada: false },
+          ],
         },
 
         methods: {
@@ -63,9 +97,24 @@
               this.contador--;
             }
           },
+          agregarTarea(nombre) {
+            const nuevaTarea = {
+              id: this.tareas.length + 1,
+              nombre: nombre,
+              completada: false,
+            };
+            this.tareas.push(nuevaTarea);
+          },
         },
 
-        computed: {},
+        computed: {
+          tareasPendientes() {
+            return this.tareas.filter((tarea) => !tarea.completada);
+          },
+          totalTareas() {
+            return this.tareas.length;
+          },
+        },
         mounted() {
           console.log('mounted');
         },
