@@ -1,0 +1,7 @@
+{
+  "recommendations": [
+    "esbenp.prettier-vscode",
+    "Vue.volar",
+    "ms-python.black-formatter"
+  ]
+}
