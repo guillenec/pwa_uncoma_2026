@@ -32,3 +32,10 @@ instance/
 .pytest_cache/
 .coverage
 htmlcov/
+
+.idea
+.DS_Store
+.code
+*.pyc
+*.sqlite3
+backend/data/
