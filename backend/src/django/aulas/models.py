@@ -60,4 +60,30 @@ class Aula(models.Model):
         return f"aula: {self.descripcion} - ubicacion: {self.ubicacion} - cantidad proyectores: {self.cant_proyector} - aforo: {self.aforo} - es climatizada: {self.es_climatizada}"
     def __unicode__(self):
         return f"aula: {self.descripcion} - ubicacion: {self.ubicacion} - cantidad proyectores: {self.cant_proyector} - aforo: {self.aforo} - es climatizada: {self.es_climatizada}"
-    
+
+
+class ReservaAula(models.Model):
+    id = models.AutoField(primary_key=True)
+    id_aula = models.ForeignKey(
+        Aula,
+        on_delete=models.CASCADE,
+        db_column='id_aula',
+    )
+    fh_desde = models.DateTimeField()
+    fh_hasta = models.DateTimeField()
+    observaciones = models.CharField(max_length=256)
+
+class HorarioMateria(models.Model):
+    id = models.AutoField(primary_key=True)
+    id_materia = models.ForeignKey(
+        Materia,
+        on_delete=models.CASCADE,
+        db_column='id_materia',
+    )
+    id_reserva = models.ForeignKey(
+        ReservaAula,
+        on_delete=models.CASCADE,
+        db_column='id_reserva',
+    )
+    fh_desde = models.DateTimeField()
+    fh_hasta = models.DateTimeField()
